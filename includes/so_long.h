@@ -22,9 +22,9 @@ typedef struct t_map
 typedef struct t_img
 {
 	void *img;
-	char relative_path;
-	int img_width;
-	int img_height;
+	char path;
+	int width;
+	int height;
 } t_img;
 
 t_img *collectible;
