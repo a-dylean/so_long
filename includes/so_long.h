@@ -3,8 +3,23 @@
 
 # include "../libft/libft.h"
 #include <../mlx/mlx.h>
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+
+# define WINDOW_WIDTH 900
+# define WINDOW_HEIGHT 500
+# define WINDOW_NAME "so_long"
+
+# define PATH_GRASS "xpm/grass.xpm"
+# define PATH_STONE "xpm/stone.xpm"
+# define PATH_COW "xpm/cow.xpm"
+# define PATH_SOIL "xpm/soil.xpm"
+# define PATH_END "xpm/end.xpm"
+
+
+# define STONE '1'
+# define SOIL '0'
+# define COW 'P'
+# define END 'E'
+# define GRASS 'C'
 
 typedef struct s_data
 {
@@ -22,12 +37,12 @@ typedef struct t_map
 typedef struct t_img
 {
 	void *img;
-	char path;
+	char *path;
 	int width;
 	int height;
 } t_img;
 
-t_img *collectible;
-
+t_img *init_img(char *path, int height, int width);
+void render_image(void	*mlx_ptr, void	*win_ptr, t_img *img, int position_x, int position_y);
 
 #endif
