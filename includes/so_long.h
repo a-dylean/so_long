@@ -63,6 +63,8 @@ t_img		*init_img(char *path, int height, int width);
 void		render_image(void *mlx_ptr, void *win_ptr, t_img *img,
 				int position_x, int position_y);
 void		parse_map(char *path_to_map);
-char **get_map(char *path_to_file);
-void free_2d_array(char **array);
+char **get_map(char *path_to_map);
+void free_2d_array(char **arr);
+int count_input_lines(char *path_to_map);
+void populate_map(char *path_to_map, char **map);
 #endif
