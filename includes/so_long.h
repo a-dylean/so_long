@@ -8,31 +8,43 @@
 # define WINDOW_HEIGHT 500
 # define WINDOW_NAME "so_long"
 
-# define PATH_GRASS "xpm/grass.xpm"
-# define PATH_STONE "xpm/stone.xpm"
-# define PATH_COW "xpm/cow.xpm"
-# define PATH_SOIL "xpm/soil.xpm"
+# define PATH_ITEM "xpm/grass.xpm"
+# define PATH_WALL "xpm/stone.xpm"
+# define PATH_PLAYER "xpm/cow.xpm"
+# define PATH_FREE "xpm/soil.xpm"
 # define PATH_END "xpm/end.xpm"
 
 
-# define STONE '1'
-# define SOIL '0'
-# define COW 'P'
+# define WALL '1'
+# define FREE '0'
+# define PLAYER 'P'
 # define END 'E'
-# define GRASS 'C'
+# define ITEM 'C'
 
-typedef struct s_data
+typedef struct s_mlx
 {
 	void		*mlx_ptr; // MLX pointer
 	void		*win_ptr; // MLX window pointer
-	void		*textures[5]; // MLX image pointers (on the stack)
 	//t_map		*map; // Map pointer (contains map details - preferably kept on the stack)
-}	t_data;
+}	t_mls;
 
-typedef struct t_map
+typedef struct s_map_data
 {
-	void *start;
-}	t_map;
+	int height;
+	int weight;
+	int pos_x;
+	int pos_y;
+	int score;
+	int current_score;
+	char **map_data;
+	void *player;
+	void *wall;
+	void *free;
+	void *end;
+	void *item;
+	int game_over;
+
+}	t_map_data;
 
 typedef struct t_img
 {
