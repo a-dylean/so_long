@@ -56,5 +56,5 @@ typedef struct t_img
 
 t_img *init_img(char *path, int height, int width);
 void render_image(void	*mlx_ptr, void	*win_ptr, t_img *img, int position_x, int position_y);
-
+void parse_map(char *path_to_map);
 #endif

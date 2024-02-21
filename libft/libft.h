@@ -6,15 +6,18 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 10:55:51 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/01/09 16:27:28 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:49:35 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 # include "ft_printf/ft_printf.h"
 # include <ctype.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -56,5 +59,12 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+char	*ft_strncpy(char *dst, const char *src, size_t size);
+
+/*GNL*/
+char	*get_remaining(char *stash);
+char	*exrtact_line(char *stash);
+char	*read_from_file(char *stash, int fd);
+char	*get_next_line(int fd);
 
 #endif
