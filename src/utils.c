@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:17:26 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/21 17:29:21 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:39:29 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,12 @@ void populate_map(char *path_to_map, char **map)
 		i++;
 	}
     close(fd);
+}
+
+int is_ber_file(char *filename)
+{
+    int len = ft_strlen(filename);
+    if (len < 4)
+        return 0;
+    return ft_strncmp(filename + len - 4, ".ber", ft_strlen(filename)) == 0;
 }

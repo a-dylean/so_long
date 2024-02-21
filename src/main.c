@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 	// int		img_height = 5;
 	if (argc == 2)
 	{
-		parse_map(argv[1]);
+		parse_input(argv[1]);
 		// mlx_ptr = mlx_init();
 		// if (!mlx_ptr)
 		// 	return (1);
