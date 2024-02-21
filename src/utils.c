@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:17:26 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/21 17:39:29 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:51:38 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void populate_map(char *path_to_map, char **map)
 		new_line = get_next_line(fd);
 		if (!new_line)
             break ;
-		map[i] = malloc((int)ft_strlen(new_line) + 1);
+		map[i] = malloc(ft_strlen(new_line) + 1);
 		if (!map[i])
 			return (free(new_line));
 		ft_strlcpy(map[i], new_line, ft_strlen(new_line) + 1);
@@ -71,11 +71,9 @@ void populate_map(char *path_to_map, char **map)
 	}
     close(fd);
 }
-
-int is_ber_file(char *filename)
+void print_error(char *error)
 {
-    int len = ft_strlen(filename);
-    if (len < 4)
-        return 0;
-    return ft_strncmp(filename + len - 4, ".ber", ft_strlen(filename)) == 0;
+    ft_printf("Error\n");
+    ft_printf("%s\n", error);
+    exit(EXIT_FAILURE);
 }

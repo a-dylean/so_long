@@ -2,7 +2,7 @@ NAME = so_long
 CC = cc -g
 CFLAGS = -Wall -Wextra -Werror -fPIC
 INCLUDES = -I includes -I libft -I libft/ft_printf -I mlx
-SRC = src/main.c  src/image_rendering.c src/parsing.c src/utils.c
+SRC = src/main.c  src/image_rendering.c src/parsing.c src/utils.c src/map_errors_checks.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 PRINTF = libft/ft_printf/ft_printf.a

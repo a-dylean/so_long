@@ -67,6 +67,13 @@ char		**get_map(char *path_to_map);
 void		free_2d_array(char **arr);
 int			count_input_lines(char *path_to_map);
 void		populate_map(char *path_to_map, char **map);
-int is_ber_file(char *filename);
+int			valid_format(char *filename);
+int			valid_tiles(char **map);
+int			valid_num_of_tiles(char **map);
+int			valid_rectangular(char **map);
+int			valid_walls(char **map);
+int			valid_path(char **map);
+// int contains_only_end_or_wall(char **array);
+void		print_error(char *error);
 
 #endif
