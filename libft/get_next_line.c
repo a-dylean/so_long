@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:27:22 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/21 14:27:44 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:14:48 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ char	*exrtact_line(char *stash)
 
 	i = 0;
 	if (!*stash)
-		return (NULL);
+		return (free(stash), NULL);
 	while (stash[i] != '\n' && stash[i])
 		i++;
 	if (stash[i] == '\n')
 		i++;
 	line = ft_substr(stash, 0, i);
+	if (!line)
+		return (free(line), NULL);
 	return (line);
 }
 

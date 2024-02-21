@@ -1,5 +1,5 @@
 NAME = so_long
-CC = gcc
+CC = cc -g
 CFLAGS = -Wall -Wextra -Werror -fPIC
 INCLUDES = -I includes -I libft -I libft/ft_printf -I mlx
 SRC = src/main.c  src/image_rendering.c src/parsing.c
