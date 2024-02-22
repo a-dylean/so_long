@@ -22,21 +22,21 @@ int	valid_format(char *filename)
 	return (ft_strncmp(filename + len - 4, ".ber", ft_strlen(filename)) == 0);
 }
 
-int	valid_tiles(char **map)
+int	valid_tiles(t_vars *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	if (!map[i])
+	if (!game->map[i])
 		return (0);
-	while (map[i])
+	while (i < game->map_height)
 	{
 		j = 0;
-		while (map[i][j])
+		while (j < game->map_weight)
 		{
-			if ((map[i][j] != END && map[i][j] != WALL && map[i][j] != FREE
-					&& map[i][j] != PLAYER) && map[i][j] != ITEM)
+			if ((game->map[i][j] != END && game->map[i][j] != WALL && game->map[i][j] != FREE
+					&& game->map[i][j] != PLAYER) && game->map[i][j] != ITEM)
 				return (0);
 			j++;
 		}
@@ -45,25 +45,7 @@ int	valid_tiles(char **map)
 	return (1);
 }
 
-// int contains_only_end_or_wall(char **array)
-// {
-//     if (array == NULL)
-//         return (0);
-
-//     for (int i = 0; array[i] != NULL; i++)
-//     {
-//         for (int j = 0; array[i][j] != '\0'; j++)
-//         {
-//             if (array[i][j] != END && array[i][j] != WALL
-//	&& array[i][j] != FREE && array[i][j] != PLAYER && array[i][j] != ITEM)
-//                 return (0); // Found a character that is not END or WALL
-//         }
-//     }
-
-//     return (1); // All characters are either END or WALL
-// }
-
-int	valid_num_of_tiles(char **map)
+int	valid_num_of_tiles(t_vars *game)
 {
 	int	i;
 	int	j;
@@ -75,16 +57,17 @@ int	valid_num_of_tiles(char **map)
 	player = 0;
 	end = 0;
 	item = 0;
-	while (map[i])
+	while (i < game->map_height)
 	{
 		j = 0;
-		while (map[i][j])
+		while (j < game->map_weight)
 		{
-			if (map[i][j] == PLAYER)
+			printf("map[%d][%d]: %c\n", i, j, game->map[i][j]);
+			if (game->map[i][j] == PLAYER)
 				player++;
-			else if (map[i][j] == END)
+			else if (game->map[i][j] == END)
 				end++;
-			else if (map[i][j] == ITEM)
+			else if (game->map[i][j] == ITEM)
 				item++;
 			j++;
 		}
@@ -95,26 +78,26 @@ int	valid_num_of_tiles(char **map)
 	return (0);
 }
 
-int	valid_rectangular(char **map)
+int	valid_rectangular(t_vars *game)
 {
 	int i;
-	size_t len;
     
     i = 0;
-	len = ft_strlen(map[0]);
-	i++;
-	while (map[i])
+	while (i < game->map_height)
 	{
-		if (ft_strlen(map[i]) != len)
-			return (0);
+		printf("[%d] len map: %ld\n", i, ft_strlen(game->map[i]));
+		// if ((int)ft_strlen(game->map[i++]) != game->map_weight)
+		// 	return (0);
 		i++;
 	}
 	return (1);
 }
 
+
 int valid_walls(char **map)
 {
-    // if (map == NULL || map[0] == NULL)
+    (void)map;
+	// if (map == NULL || map[0] == NULL)
     //     return 0; // The map is NULL or empty
 
     // // Check the first and last strings
@@ -140,5 +123,6 @@ int valid_walls(char **map)
 
 int valid_path(char **map)
 {
+	(void)map;
     return 1;
 }

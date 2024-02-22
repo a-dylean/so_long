@@ -2,14 +2,12 @@
 
 int	main(int argc, char **argv)
 {
-	// void	*mlx_ptr;
-	// void	*win_ptr;
+	t_vars game;
 
-	// int		img_width = 5;
-	// int		img_height = 5;
+	game.game_over = 0;
 	if (argc == 2)
 	{
-		parse_input(argv[1]);
+		parse_input(argv[1], &game);
 		// mlx_ptr = mlx_init();
 		// if (!mlx_ptr)
 		// 	return (1);
@@ -35,6 +33,6 @@ int	main(int argc, char **argv)
 		//free(mlx_ptr);
 	}
 	else
-		ft_printf("WRONG INPUT! Try: ./so_long [PATH TO MAP]");
+		print_error("WRONG INPUT! Try: ./so_long [PATH TO MAP]");
 	return (0);
 }

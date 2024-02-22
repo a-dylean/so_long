@@ -12,24 +12,30 @@
 
 #include "../includes/so_long.h"
 
-void	parse_input(char *path_to_map)
+void	parse_input(char *path_to_map, t_vars *game)
 {
-	char	**map;
-
 	if (!valid_format(path_to_map))
 		print_error("Invalid map format!");
-	map = get_map(path_to_map);
+	game->map = get_map(path_to_map);
+	game->map_height = count_input_lines(path_to_map);
+	// game->map = malloc(game->map_height * sizeof(char *) + 1);
+	// if (!game->map)
+	// 	print_error("Malloc failed");
+	// populate_map(path_to_map, game->map);
 	// int i = 0;
-	// while (map[i])
+	// while (game->map[i])
 	// {
-	//     printf("%s", map[i]);
+	//     printf("%s", game->map[i]);
 	//     i++;
 	// }
-	// printf("%d\n", valid_tiles(map));
-	if (!valid_tiles(map) || !valid_num_of_tiles(map) || !valid_rectangular(map)
-		|| !valid_walls(map) || !valid_path(map))
-		print_error("Invalid map!");
-	free_2d_array(map);
+	game->map_weight = ft_strlen(game->map[0]);
+	//valid_num_of_tiles(game);
+	printf("Valid tiles result: %d\n", valid_rectangular(game));
+	// if (!valid_tiles(game->map) || !valid_num_of_tiles(game->map) || !valid_rectangular(game->map)
+	// 	|| !valid_walls(game->map) || !valid_path(game->map))
+	// 	print_error("Invalid map!");
+	//printf("valid tiles: %d\n", valid_tiles(game->map));
+	free_2d_array(game->map);
 }
 
 char	**get_map(char *path_to_map)

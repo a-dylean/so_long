@@ -33,15 +33,18 @@ typedef struct s_point
 	int		y;
 }			t_point;
 
-typedef struct s_map_data
+typedef struct s_vars
 {
-	int		height;
-	int		weight;
+	void *mlx;
+	void *window;
+	int		map_height;
+	int		map_weight;
 	int		pos_x;
 	int		pos_y;
-	int		score;
-	int		current_score;
-	char	**map_data;
+	int		items;
+	int		items_collected;
+	int		steps;
+	char	**map;
 	void	*player;
 	void	*wall;
 	void	*free;
@@ -49,7 +52,7 @@ typedef struct s_map_data
 	void	*item;
 	int		game_over;
 
-}			t_map_data;
+}			t_vars;
 
 typedef struct t_img
 {
@@ -62,15 +65,15 @@ typedef struct t_img
 t_img		*init_img(char *path, int height, int width);
 void		render_image(void *mlx_ptr, void *win_ptr, t_img *img,
 				int position_x, int position_y);
-void		parse_input(char *path_to_map);
+void	parse_input(char *path_to_map, t_vars *game);
 char		**get_map(char *path_to_map);
 void		free_2d_array(char **arr);
 int			count_input_lines(char *path_to_map);
 void		populate_map(char *path_to_map, char **map);
 int			valid_format(char *filename);
-int			valid_tiles(char **map);
-int			valid_num_of_tiles(char **map);
-int			valid_rectangular(char **map);
+int			valid_tiles(t_vars *game);
+int			valid_num_of_tiles(t_vars *game);
+int			valid_rectangular(t_vars *game);
 int			valid_walls(char **map);
 int			valid_path(char **map);
 // int contains_only_end_or_wall(char **array);

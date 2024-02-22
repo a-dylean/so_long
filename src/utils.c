@@ -12,6 +12,8 @@
 
 #include "../includes/so_long.h"
 
+//printf("map[%d][%d]: %c\n", 1, j, game->map[i][j]);
+
 void	free_2d_array(char **arr)
 {
 	int	i;
@@ -56,6 +58,8 @@ void populate_map(char *path_to_map, char **map)
 
     i = 0;
     fd = open(path_to_map, O_RDONLY);
+	if (fd == -1)
+		print_error("No such file or directory");
 	while (1)
 	{
 		new_line = get_next_line(fd);
