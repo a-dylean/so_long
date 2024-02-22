@@ -14,15 +14,25 @@
 
 void	parse_input(char *path_to_map, t_vars *game)
 {
+	t_tiles tiles;
+
+	game->items = 0;
+	tiles.player = 0;
+	tiles.end = 0;
+	tiles.items = game->items;
 	if (!valid_format(path_to_map))
 		print_error("Invalid map format!");
 	game->map = get_map(path_to_map);
+	game->map_copy = get_map(path_to_map);
 	game->map_height = count_input_lines(path_to_map);
 	game->map_weight = ft_strlen(game->map[0]);
-	if (!valid_tiles(game) || !valid_num_of_tiles(game) || !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
-	 	//proper free missing
-		print_error("Invalid map!");
+	printf("valid path: %d\n", valid_path(game));
+	printf("valid tiles: %d\n", valid_num_of_tiles(game, tiles));
+	// if (!valid_tiles(game) || !valid_num_of_tiles(game, tiles) || !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
+	//  	//proper free missing
+	// 	print_error("Invalid map!");
 	free_2d_array(game->map);
+	free_2d_array(game->map_copy);
 }
 
 char	**get_map(char *path_to_map)

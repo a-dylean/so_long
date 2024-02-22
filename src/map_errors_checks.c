@@ -45,34 +45,28 @@ int	valid_tiles(t_vars *game)
 	return (1);
 }
 
-int	valid_num_of_tiles(t_vars *game)
+int	valid_num_of_tiles(t_vars *game, t_tiles tiles)
 {
 	int	i;
 	int	j;
-	int	player;
-	int	end;
-	int	item;
 
 	i = 0;
-	player = 0;
-	end = 0;
-	item = 0;
 	while (i < game->map_height)
 	{
 		j = 0;
 		while (j < game->map_weight)
 		{
 			if (game->map[i][j] == PLAYER)
-				player++;
+				tiles.player++;
 			else if (game->map[i][j] == END)
-				end++;
+				tiles.end++;
 			else if (game->map[i][j] == ITEM)
-				item++;
+				tiles.items++;
 			j++;
 		}
 		i++;
 	}
-	if (end == 1 && item >= 1 && player == 1)
+	if (tiles.end == 1 && tiles.items >= 1 && tiles.player == 1)
 		return (1);
 	return (0);
 }
@@ -132,10 +126,4 @@ int valid_walls(t_vars *game)
 		i++;
 	}
 	return (1);
-}
-
-int valid_path(t_vars *game)
-{
-	(void)game;
-    return 1;
 }

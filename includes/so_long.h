@@ -27,11 +27,12 @@ typedef struct s_mlx
 					// t_map		*map;
 }			t_mls;
 
-typedef struct s_point
+typedef struct s_tiles
 {
-	int		x;
-	int		y;
-}			t_point;
+	int player;
+	int end;
+	int items;
+}			t_tiles;
 
 typedef struct s_vars
 {
@@ -45,6 +46,7 @@ typedef struct s_vars
 	int		items_collected;
 	int		steps;
 	char	**map;
+	char	**map_copy;
 	void	*player;
 	void	*wall;
 	void	*free;
@@ -71,7 +73,7 @@ int			count_input_lines(char *path_to_map);
 void		populate_map(char *path_to_map, char **map);
 int			valid_format(char *filename);
 int			valid_tiles(t_vars *game);
-int			valid_num_of_tiles(t_vars *game);
+int			valid_num_of_tiles(t_vars *game, t_tiles tiles);
 int			valid_rectangular(t_vars *game);
 int			valid_walls(t_vars *game);
 int			valid_path(t_vars *game);
