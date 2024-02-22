@@ -54,23 +54,26 @@ void populate_map(char *path_to_map, char **map)
 {
     int fd;
     char *new_line;
+	char *clean_new_line;
     int i;
 
     i = 0;
     fd = open(path_to_map, O_RDONLY);
 	if (fd == -1)
+		//add free statement, there's a leak if quits here
 		print_error("No such file or directory");
 	while (1)
 	{
 		new_line = get_next_line(fd);
 		if (!new_line)
             break ;
-		map[i] = malloc(ft_strlen(new_line) + 1);
-		if (!map[i])
-			return (free(new_line));
-		ft_strlcpy(map[i], new_line, ft_strlen(new_line) + 1);
+		clean_new_line = ft_strtrim(new_line, "\n");
 		free(new_line);
-		new_line = NULL;
+		map[i] = malloc(ft_strlen(clean_new_line) + 1);
+		if (!map[i])
+			return (free(clean_new_line));
+		ft_strlcpy(map[i], clean_new_line, ft_strlen(clean_new_line) + 1);
+		free(clean_new_line);
 		i++;
 	}
     close(fd);
@@ -79,5 +82,4 @@ void print_error(char *error)
 {
     ft_printf("Error\n");
     ft_printf("%s\n", error);
-    exit(EXIT_FAILURE);
 }

@@ -51,7 +51,6 @@ typedef struct s_vars
 	void	*end;
 	void	*item;
 	int		game_over;
-
 }			t_vars;
 
 typedef struct t_img
@@ -74,8 +73,8 @@ int			valid_format(char *filename);
 int			valid_tiles(t_vars *game);
 int			valid_num_of_tiles(t_vars *game);
 int			valid_rectangular(t_vars *game);
-int			valid_walls(char **map);
-int			valid_path(char **map);
+int			valid_walls(t_vars *game);
+int			valid_path(t_vars *game);
 // int contains_only_end_or_wall(char **array);
 void		print_error(char *error);
 

@@ -62,7 +62,6 @@ int	valid_num_of_tiles(t_vars *game)
 		j = 0;
 		while (j < game->map_weight)
 		{
-			printf("map[%d][%d]: %c\n", i, j, game->map[i][j]);
 			if (game->map[i][j] == PLAYER)
 				player++;
 			else if (game->map[i][j] == END)
@@ -85,44 +84,58 @@ int	valid_rectangular(t_vars *game)
     i = 0;
 	while (i < game->map_height)
 	{
-		printf("[%d] len map: %ld\n", i, ft_strlen(game->map[i]));
-		// if ((int)ft_strlen(game->map[i++]) != game->map_weight)
-		// 	return (0);
+		if ((int)ft_strlen(game->map[i++]) != game->map_weight)
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-
-int valid_walls(char **map)
+int	valid_top_and_bottom(char *line)
 {
-    (void)map;
-	// if (map == NULL || map[0] == NULL)
-    //     return 0; // The map is NULL or empty
+	int	i;
 
-    // // Check the first and last strings
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     int index = i == 0 ? 0 : strlen(map) - 1;
-    //     for (int j = 0; map[index][j] != '\0'; j++)
-    //     {
-    //         if (map[index][j] != '1')
-    //             return 0; // Found a character that is not '1'
-    //     }
-    // }
-
-    // // Check the first and last character of each string
-    // for (int i = 0; map[i] != NULL; i++)
-    // {
-    //     if (map[i][0] != '1' || map[i][strlen(map[i]) - 1] != '1')
-    //         return 0; // Found a string that does not start or end with '1'
-    // }
-
-    return 1; // All checks passed
+	i = 0;
+	while (line[i] && line[i] == '1')
+		i++;
+	return (line[i] == '\0');
 }
 
-int valid_path(char **map)
+int	valid_left_and_right(char *line)
 {
-	(void)map;
+	int	i;
+
+	if (line[0] != '1')
+		return (0);
+	i = 0;
+	while (line[i])
+		i++;
+	if (line[i - 1] == '1')
+		return (1);
+	return (0);
+}
+
+int valid_walls(t_vars *game)
+{
+	int i;
+   	
+	i = 0;
+  	while(game->map[i])
+	{
+		if (i == 0 || i == game->map_height)
+		{
+			if (!valid_top_and_bottom(game->map[i]))
+				return (0);
+		}
+		else if (!valid_left_and_right(game->map[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int valid_path(t_vars *game)
+{
+	(void)game;
     return 1;
 }
