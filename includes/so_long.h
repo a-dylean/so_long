@@ -7,7 +7,7 @@
 # define SIZE 24
 # define WINDOW_NAME "so_long"
 
-# define PATH_COIN "xpm/coin.xpm"
+# define PATH_KEY "xpm/key.xpm"
 # define PATH_WALL "xpm/wall.xpm"
 # define PATH_PLAYER "xpm/player.xpm"
 # define PATH_FREE "xpm/free.xpm"
@@ -17,7 +17,7 @@
 # define FREE '0'
 # define PLAYER 'P'
 # define END 'E'
-# define COIN 'C'
+# define KEY 'C'
 
 # define UP 87
 # define DOWN 84
@@ -29,7 +29,7 @@ typedef struct s_tiles
 {
 	int		player;
 	int		end;
-	int		coins;
+	int		keys;
 }			t_tiles;
 
 typedef struct s_vars
@@ -40,8 +40,8 @@ typedef struct s_vars
 	int		map_weight;
 	int		pos_x;
 	int		pos_y;
-	int		coins;
-	int		coins_collected;
+	int		keys;
+	int		keys_collected;
 	int		steps;
 	char	**map;
 	int		player_pos_x;
@@ -51,7 +51,7 @@ typedef struct s_vars
 	void	*wall;
 	void	*free;
 	void	*end;
-	void	*coin;
+	void	*key;
 	int		game_over;
 }			t_vars;
 

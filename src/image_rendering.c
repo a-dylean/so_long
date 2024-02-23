@@ -21,7 +21,7 @@ void	create_images(t_vars *game)
 	game->end = mlx_xpm_file_to_image(game->mlx, PATH_END, &pos[0], &pos[1]);
 	game->wall = mlx_xpm_file_to_image(game->mlx, PATH_WALL, &pos[0], &pos[1]);
 	game->free = mlx_xpm_file_to_image(game->mlx, PATH_FREE, &pos[0], &pos[1]);
-	game->coin = mlx_xpm_file_to_image(game->mlx, PATH_COIN, &pos[0], &pos[1]);
+	game->key = mlx_xpm_file_to_image(game->mlx, PATH_KEY, &pos[0], &pos[1]);
 }
 
 int	render_images(t_vars *game)
@@ -44,8 +44,8 @@ int	render_images(t_vars *game)
 			else if (game->map[game->pos_y][game->pos_x] == END)
 				mlx_put_image_to_window(game->mlx, game->window, game->end,
 					game->pos_x * SIZE, game->pos_y * SIZE);
-			else if (game->map[game->pos_y][game->pos_x] == COIN)
-				mlx_put_image_to_window(game->mlx, game->window, game->coin,
+			else if (game->map[game->pos_y][game->pos_x] == KEY)
+				mlx_put_image_to_window(game->mlx, game->window, game->key,
 					game->pos_x * SIZE, game->pos_y * SIZE);
 			game->pos_x++;
 		}

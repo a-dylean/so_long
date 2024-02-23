@@ -16,10 +16,10 @@ void	parse_input(char *path_to_map, t_vars *game)
 {
 	t_tiles	tiles;
 
-	game->coins = 0;
+	game->key = 0;
 	tiles.player = 0;
 	tiles.end = 0;
-	tiles.coins = game->coins;
+	tiles.keys = game->keys;
 	if (!valid_format(path_to_map))
 		print_error("Invalid map format!");
 	game->map = get_map(path_to_map);
