@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:43:55 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/21 19:29:10 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:35:54 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	valid_tiles(t_vars *game)
 		while (j < game->map_weight)
 		{
 			if ((game->map[i][j] != END && game->map[i][j] != WALL && game->map[i][j] != FREE
-					&& game->map[i][j] != PLAYER) && game->map[i][j] != ITEM)
+					&& game->map[i][j] != PLAYER) && game->map[i][j] != COIN)
 				return (0);
 			j++;
 		}
@@ -60,13 +60,13 @@ int	valid_num_of_tiles(t_vars *game, t_tiles tiles)
 				tiles.player++;
 			else if (game->map[i][j] == END)
 				tiles.end++;
-			else if (game->map[i][j] == ITEM)
-				tiles.items++;
+			else if (game->map[i][j] == COIN)
+				tiles.coins++;
 			j++;
 		}
 		i++;
 	}
-	if (tiles.end == 1 && tiles.items >= 1 && tiles.player == 1)
+	if (tiles.end == 1 && tiles.coins >= 1 && tiles.player == 1)
 		return (1);
 	return (0);
 }

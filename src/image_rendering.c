@@ -6,26 +6,50 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:27:50 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/20 18:24:03 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:49:01 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-
-// t_img *init_img(char *path, int height, int width)
-// {
-//     t_img *img;
-    
-//     img->path = path;
-//     img->height = height;
-//     img->width = width;
-//     return (img);
-// }
-void render_image(void	*mlx_ptr, void	*win_ptr, t_img *img, int position_x, int position_y)
+void	create_images(t_vars *game)
 {
-    // void *img = 
-    // if (!img)
-    //     return (NULL);
-    mlx_put_image_to_window(mlx_ptr, win_ptr, img, position_x, position_y); 
+	int	pos[2] = {1, 1};
+
+	game->player = mlx_xpm_file_to_image(game->mlx, PATH_PLAYER, &pos[0],
+			&pos[1]);
+	game->end = mlx_xpm_file_to_image(game->mlx, PATH_END, &pos[0], &pos[1]);
+	game->wall = mlx_xpm_file_to_image(game->mlx, PATH_WALL, &pos[0], &pos[1]);
+	game->free = mlx_xpm_file_to_image(game->mlx, PATH_FREE, &pos[0], &pos[1]);
+	game->coin = mlx_xpm_file_to_image(game->mlx, PATH_COIN, &pos[0], &pos[1]);
+}
+
+int	render_images(t_vars *game)
+{
+	game->pos_y = 0;
+	while (game->pos_y < game->map_height)
+	{
+		game->pos_x = 0;
+		while (game->pos_x < game->map_weight)
+		{
+			if (game->map[game->pos_y][game->pos_x] == WALL)
+				mlx_put_image_to_window(game->mlx, game->window, game->wall,
+					game->pos_x * SIZE, game->pos_y * SIZE);
+			else if (game->map[game->pos_y][game->pos_x] == FREE)
+				mlx_put_image_to_window(game->mlx, game->window, game->free,
+					game->pos_x * SIZE, game->pos_y * SIZE);
+			else if (game->map[game->pos_y][game->pos_x] == PLAYER)
+				mlx_put_image_to_window(game->mlx, game->window, game->player,
+					game->pos_x * SIZE, game->pos_y * SIZE);
+			else if (game->map[game->pos_y][game->pos_x] == END)
+				mlx_put_image_to_window(game->mlx, game->window, game->end,
+					game->pos_x * SIZE, game->pos_y * SIZE);
+			else if (game->map[game->pos_y][game->pos_x] == COIN)
+				mlx_put_image_to_window(game->mlx, game->window, game->coin,
+					game->pos_x * SIZE, game->pos_y * SIZE);
+			game->pos_x++;
+		}
+		game->pos_y++;
+	}
+	return (0);
 }
