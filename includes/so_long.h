@@ -56,7 +56,7 @@ typedef struct s_vars
 }			t_vars;
 
 void		parse_input(char *path_to_map, t_vars *game);
-char		**get_map(char *path_to_map);
+void		**get_map(char *path_to_map, t_vars *game);
 void		free_2d_array(char **arr);
 int			count_input_lines(char *path_to_map);
 void		populate_map(char *path_to_map, char **map);
