@@ -19,6 +19,12 @@
 # define END 'E'
 # define COIN 'C'
 
+# define UP 87
+# define DOWN 84
+# define LEFT 79
+# define RIGHT 89
+# define ESC 53
+
 typedef struct s_tiles
 {
 	int		player;
@@ -38,6 +44,8 @@ typedef struct s_vars
 	int		coins_collected;
 	int		steps;
 	char	**map;
+	int		player_pos_x;
+	int		player_pos_y;
 	char	**map_copy;
 	void	*player;
 	void	*wall;
@@ -47,17 +55,6 @@ typedef struct s_vars
 	int		game_over;
 }			t_vars;
 
-typedef struct t_img
-{
-	void	*img;
-	char	*path;
-	int		width;
-	int		height;
-}			t_img;
-
-t_img		*init_img(char *path, int height, int width);
-void		render_image(void *mlx_ptr, void *win_ptr, t_img *img,
-				int position_x, int position_y);
 void		parse_input(char *path_to_map, t_vars *game);
 char		**get_map(char *path_to_map);
 void		free_2d_array(char **arr);
@@ -71,8 +68,8 @@ int			valid_walls(t_vars *game);
 int			valid_path(t_vars *game);
 void		create_images(t_vars *game);
 int			render_images(t_vars *game);
-
-// int contains_only_end_or_wall(char **array);
+int			key_hook(int keycode, t_vars *game);
+int			exit_hook(t_vars *game);
 void		print_error(char *error);
 
 #endif

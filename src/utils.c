@@ -6,13 +6,11 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:17:26 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/21 18:51:38 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:41:50 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-//printf("map[%d][%d]: %c\n", 1, j, game->map[i][j]);
 
 void	free_2d_array(char **arr)
 {

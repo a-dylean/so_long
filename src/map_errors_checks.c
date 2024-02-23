@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:43:55 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/23 11:35:54 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:38:00 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ int	valid_num_of_tiles(t_vars *game, t_tiles tiles)
 		while (j < game->map_weight)
 		{
 			if (game->map[i][j] == PLAYER)
+			{
 				tiles.player++;
+				game->player_pos_x = i;
+				game->player_pos_y = j;
+			}
 			else if (game->map[i][j] == END)
 				tiles.end++;
 			else if (game->map[i][j] == COIN)
@@ -75,10 +79,10 @@ int	valid_rectangular(t_vars *game)
 {
 	int i;
     
-    i = 0;
+    i = 1;
 	while (i < game->map_height)
 	{
-		if ((int)ft_strlen(game->map[i++]) != game->map_weight)
+		if ((int)ft_strlen(game->map[i]) != game->map_weight)
 			return (0);
 		i++;
 	}

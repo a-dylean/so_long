@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:30:31 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/23 13:50:59 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:45:06 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ void	parse_input(char *path_to_map, t_vars *game)
 	game->map = get_map(path_to_map);
 	game->map_copy = get_map(path_to_map);
 	game->map_height = count_input_lines(path_to_map);
-	game->map_weight = ft_strlen(game->map[0]);
-	// printf("valid path: %d\n", valid_path(game));
-	// printf("valid tiles: %d\n", valid_num_of_tiles(game, tiles));
-	// if (!valid_tiles(game) || !valid_num_of_tiles(game, tiles)
-	//	|| !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
-	//  	//proper free missing
-	// 	print_error("Invalid map!");
+	game->map_weight = ft_strlen(game->map[0]); //segfault here
+	if (!valid_tiles(game) || !valid_num_of_tiles(game, tiles)
+		|| !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
+	 	//proper free missing
+		print_error("Invalid map!");
 	// free_2d_array(game->map);
 	// free_2d_array(game->map_copy);
 }
