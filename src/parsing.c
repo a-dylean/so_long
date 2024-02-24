@@ -35,18 +35,12 @@ void	parse_input(char *path_to_map, t_vars *game)
 	populate_map(path_to_map, game->map_copy);
 	game->map_copy[game->map_height] = NULL;	
 	game->map_weight = ft_strlen(game->map[0]); //segfault here
-	if (!valid_tiles(game) 
-	|| !valid_num_of_tiles(game, tiles)	|| !valid_rectangular(game) || !valid_walls(game) )
-	//|| !valid_path(game)
+	if (!valid_tiles(game) || !valid_num_of_tiles(game, tiles)|| !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
 	{
 		//proper free missing
 		print_error("Invalid map!");
 		exit(0);
 	}
-	 	
-	// free_2d_array(game->map);
-	// free_2d_array(game->map_copy);
-
 }
 
 // void	**get_map(char *path_to_map, t_vars *game)

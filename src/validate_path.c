@@ -29,8 +29,8 @@ void player_position(t_vars *game)
         {
             if (game->map[i][j] == PLAYER)
             {
-                game->pos_x = j;
                 game->pos_y = i;
+                game->pos_x = j;
                 return ;
             }
             j++;
@@ -45,18 +45,15 @@ int valid_path(t_vars *game)
     int j;
 
     i = 0;
+    player_position(game);
     fill(game, game->pos_x, game->pos_y);
-    i = 0;
     while (i < game->map_height)
     {
         j = 0;
         while (j < game->map_weight)
         {
             if (game->map_copy[i][j] == 'C' || game->map_copy[i][j] == 'E')
-            {
-                print_error("Invalid map!");
                 return (0);
-            }
             j++;
         }
         i++;
