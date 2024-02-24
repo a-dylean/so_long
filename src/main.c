@@ -13,6 +13,7 @@ void init_vars(t_vars *game)
 	game->keys_count = 0;
 	game->keys_collected = 0;
 	game->steps = 0;
+	game->msg_error = NULL;
 }
 
 int	main(int argc, char **argv)

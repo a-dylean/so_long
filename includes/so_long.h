@@ -51,6 +51,7 @@ typedef struct s_vars
 	void	*free;
 	void	*end;
 	void	*key;
+	char	*msg_error;
 }			t_vars;
 
 void		parse_input(char *path_to_map, t_vars *game);

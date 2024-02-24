@@ -53,7 +53,10 @@ int valid_path(t_vars *game)
         while (j < game->map_weight)
         {
             if (game->map_copy[i][j] == 'C' || game->map_copy[i][j] == 'E')
+            {
+                game->msg_error = "Invalid path detected\n";
                 return (0);
+            } 
             j++;
         }
         i++;

@@ -34,8 +34,11 @@ int	valid_tiles(t_vars *game)
 		while (j < game->map_weight)
 		{
 			if ((game->map[i][j] != END && game->map[i][j] != WALL && game->map[i][j] != FREE
-					&& game->map[i][j] != PLAYER && game->map[i][j] != KEY) || game->map[i][j] == '\0')
-				return (0);
+					&& game->map[i][j] != PLAYER && game->map[i][j] != KEY))
+					{
+						game->msg_error = "Invalid component in the map or map is not rectangular\n";
+						return (0);
+					}
 			j++;
 		}
 		i++;
@@ -66,6 +69,7 @@ int	valid_num_of_tiles(t_vars *game)
 	}
 	if (game->end_count == 1 && game->keys_count >= 1 && game->player_count == 1)
 		return (1);
+	game->msg_error = "Invalid number of required components in the map\n";
 	return (0);
 }
 
@@ -77,7 +81,10 @@ int	valid_rectangular(t_vars *game)
 	while (i < game->map_height)
 	{
 		if ((int)ft_strlen(game->map[i]) != game->map_weight)
+		{
+			game->msg_error = "Map is not rectangular\n";
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -114,13 +121,19 @@ int valid_walls(t_vars *game)
 	i = 0;
   	while(game->map[i])
 	{
-		if (i == 0 || i == game->map_height)
+		if (i == 0 || i == game->map_height - 1)
 		{
 			if (!valid_top_and_bottom(game->map[i]))
+			{
+				game->msg_error = "Invalid top or bottom wall\n";
 				return (0);
+			}
 		}
 		else if (!valid_left_and_right(game->map[i]))
+		{
+			game->msg_error = "Invalid left or right wall\n";
 			return (0);
+		}
 		i++;
 	}
 	return (1);

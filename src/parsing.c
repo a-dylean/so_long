@@ -33,7 +33,9 @@ void	parse_input(char *path_to_map, t_vars *game)
 	{
 		free_2d_array(game->map);
 		free_2d_array(game->map_copy);
-		exit_with_error("Invalid map");
+		if (game->msg_error)
+			ft_printf("Error\n%s", game->msg_error);
+		exit(0);
 	}
 }
 
