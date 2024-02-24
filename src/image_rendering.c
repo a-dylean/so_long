@@ -54,31 +54,77 @@ int	render_images(t_vars *game)
 	return (0);
 }
 
-int	key_hook(int keycode, t_vars *game)
+int next_tile_check(t_vars *game, int *current_position)
 {
-	// (void) keycode;
-	// (void)game;
-	if (keycode == 1)
+	char tile;
+
+	tile = game->map[game->player_pos_x][game->player_pos_y];
+	if (tile != WALL && tile != END)
 	{
-		printf("1");
-		game->map[game->player_pos_x][game->player_pos_y] = FREE;
-		game->map[game->player_pos_x + 1][game->player_pos_y] = PLAYER;
-		game->player_pos_x++;
+		game->steps++;
+		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
+		game->map[current_position[0]][current_position[1]] = FREE;
+		ft_printf("Steps: %d\n", game->steps);
 	}
-	if (keycode == 13)
-		printf("13");
-	if (keycode == 0)
-		printf("0");
-	if (keycode == 2)
-		printf("2");
-	//render_images(game);
+	else if (tile == WALL || (tile == END && game->keys_collected != game->keys))
+	{
+		game->player_pos_x = current_position[0];
+		game->player_pos_y = current_position[1];
+	}
+	if (tile == KEY)
+		game->keys_collected++;
+	else if (tile == END && game->keys_collected == game->keys)
+	{
+		game->steps++;
+		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
+		game->map[current_position[0]][current_position[1]] = FREE;
+		ft_printf("You won in %d steps. Can you do better next time?\n", game->steps);
+		close_game(game);
+	}
 	return (0);
 }
 
-int	exit_hook(t_vars *game)
+int	handle_keys(int keycode, t_vars *game)
 {
+	if (keycode == UP)
+		game->player_pos_x--;
+	else if (keycode == DOWN)
+		game->player_pos_x++;
+	else if (keycode == LEFT)
+		game->player_pos_y--;
+	else if (keycode == RIGHT)
+		game->player_pos_y++;
+	else if (keycode == ESC)
+		close_game(game);
+	else 
+		return (0);
+	return (1);
+}
+
+int key_hook(int keycode, t_vars *game)
+{
+	int current_position[2];
+
+	current_position[0] = game->player_pos_x;
+	current_position[1] = game->player_pos_y;
+	if (!handle_keys(keycode, game))
+		return (0);
+	next_tile_check(game, current_position);
+	render_images(game);
+	return (0);
+}
+
+void	close_game(t_vars *game)
+{
+	mlx_destroy_image(game->mlx, game->end);
+	mlx_destroy_image(game->mlx, game->wall);
+	mlx_destroy_image(game->mlx, game->free);
+	mlx_destroy_image(game->mlx, game->player);
+	mlx_destroy_image(game->mlx, game->key);
 	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	return(0);
+	free_2d_array(game->map);
+	free_2d_array(game->map_copy);
+	exit(0);
 }

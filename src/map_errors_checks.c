@@ -65,12 +65,12 @@ int	valid_num_of_tiles(t_vars *game, t_tiles tiles)
 			else if (game->map[i][j] == END)
 				tiles.end++;
 			else if (game->map[i][j] == KEY)
-				tiles.keys++;
+				game->keys++;
 			j++;
 		}
 		i++;
 	}
-	if (tiles.end == 1 && tiles.keys >= 1 && tiles.player == 1)
+	if (tiles.end == 1 && game->keys >= 1 && tiles.player == 1)
 		return (1);
 	return (0);
 }

@@ -16,10 +16,10 @@ void	parse_input(char *path_to_map, t_vars *game)
 {
 	t_tiles	tiles;
 
-	game->keys = 0;
 	tiles.player = 0;
 	tiles.end = 0;
-	tiles.keys = game->keys;
+	tiles.keys = 0;
+	game->keys = tiles.keys;
 	if (!valid_format(path_to_map))
 		//leak here
 		print_error("Invalid map format!");
@@ -38,9 +38,12 @@ void	parse_input(char *path_to_map, t_vars *game)
 	if (!valid_tiles(game) 
 	|| !valid_num_of_tiles(game, tiles)	|| !valid_rectangular(game) || !valid_walls(game) )
 	//|| !valid_path(game)
-	 	//proper free missing
+	{
+		//proper free missing
 		print_error("Invalid map!");
 		exit(0);
+	}
+	 	
 	// free_2d_array(game->map);
 	// free_2d_array(game->map_copy);
 

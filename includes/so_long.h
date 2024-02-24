@@ -3,6 +3,10 @@
 
 # include "../libft/libft.h"
 # include <../mlx/mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include "mlx.h"
+# include "fcntl.h"
 
 # define SIZE 24
 # define WINDOW_NAME "so_long"
@@ -19,11 +23,11 @@
 # define END 'E'
 # define KEY 'C'
 
-# define UP 87
-# define DOWN 84
-# define LEFT 79
-# define RIGHT 89
-# define ESC 53
+# define UP 119
+# define DOWN 115
+# define LEFT 97
+# define RIGHT 100
+# define ESC 65307
 
 typedef struct s_tiles
 {
@@ -52,7 +56,6 @@ typedef struct s_vars
 	void	*free;
 	void	*end;
 	void	*key;
-	int		game_over;
 }			t_vars;
 
 void		parse_input(char *path_to_map, t_vars *game);
@@ -69,7 +72,8 @@ int			valid_path(t_vars *game);
 void		create_images(t_vars *game);
 int			render_images(t_vars *game);
 int			key_hook(int keycode, t_vars *game);
-int			exit_hook(t_vars *game);
+void		close_game(t_vars *game);
 void		print_error(char *error);
+int			next_tile_check(t_vars *game, int *current_position);
 
 #endif

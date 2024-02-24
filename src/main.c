@@ -1,21 +1,15 @@
 #include "../includes/so_long.h"
 
-int on_keypress(int keysym, t_vars *game)
-{
-	(void)game;
-	printf("Pressed key: %d\\n", keysym);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_vars	game;
 
 	if (argc == 2)
 	{
-		game.game_over = 0;
 		game.pos_x = 0;
 		game.pos_y = 0;
+		game.steps = 0;
+		game.keys_collected = 0;
 		game.mlx = mlx_init();
 		if (!game.mlx)
 			return (1);
@@ -26,8 +20,7 @@ int	main(int argc, char **argv)
 			return (free(game.mlx), 1);
 		create_images(&game);
 		//render_images(&game);
-		mlx_hook(game.window, 2, 0, key_hook, &game);
-		mlx_hook(game.window, 17, 0, exit_hook, &game);
+		mlx_hook(game.window, KeyPress, KeyPressMask, key_hook, &game);
 		mlx_loop_hook(game.mlx, &render_images, &game);
 		mlx_loop(game.mlx);
 	}
