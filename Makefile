@@ -1,9 +1,8 @@
 NAME = so_long
-CC = cc -g
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -fPIC
 INCLUDES = -I includes -I libft -I libft/ft_printf -I mlx
-SRC = src/main.c  src/image_rendering.c src/parsing.c src/utils.c src/map_errors_checks.c \
- src/validate_path.c
+SRC = src/main.c  src/image_rendering.c src/parsing.c src/utils.c src/map_errors_checks.c src/validate_path.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 PRINTF = libft/ft_printf/ft_printf.a
@@ -17,7 +16,6 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 $(NAME): $(LIBFT) $(PRINTF) $(MLX_LIB) $(OBJ)
-#$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(PRINTF) $(MLX_FLAGS)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) -L libft -lft -L libft/ft_printf -lftprintf $(MLX_FLAGS)
 
 $(LIBFT):

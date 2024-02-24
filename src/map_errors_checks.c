@@ -17,7 +17,7 @@ int	valid_format(char *filename)
 	int	len;
 
 	len = ft_strlen(filename);
-	if (len < 4)
+	if (len < 5)
 		return (0);
 	return (ft_strncmp(filename + len - 4, ".ber", ft_strlen(filename)) == 0);
 }
@@ -28,15 +28,13 @@ int	valid_tiles(t_vars *game)
 	int	j;
 
 	i = 0;
-	if (!game->map[i])
-		return (0);
 	while (i < game->map_height)
 	{
 		j = 0;
 		while (j < game->map_weight)
 		{
 			if ((game->map[i][j] != END && game->map[i][j] != WALL && game->map[i][j] != FREE
-					&& game->map[i][j] != PLAYER) && game->map[i][j] != KEY)
+					&& game->map[i][j] != PLAYER && game->map[i][j] != KEY) || game->map[i][j] == '\0')
 				return (0);
 			j++;
 		}
@@ -45,7 +43,7 @@ int	valid_tiles(t_vars *game)
 	return (1);
 }
 
-int	valid_num_of_tiles(t_vars *game, t_tiles tiles)
+int	valid_num_of_tiles(t_vars *game)
 {
 	int	i;
 	int	j;
@@ -57,20 +55,16 @@ int	valid_num_of_tiles(t_vars *game, t_tiles tiles)
 		while (j < game->map_weight)
 		{
 			if (game->map[i][j] == PLAYER)
-			{
-				tiles.player++;
-				game->player_pos_x = i;
-				game->player_pos_y = j;
-			}
+				game->player_count++;
 			else if (game->map[i][j] == END)
-				tiles.end++;
+				game->end_count++;
 			else if (game->map[i][j] == KEY)
-				game->keys++;
+				game->keys_count++;
 			j++;
 		}
 		i++;
 	}
-	if (tiles.end == 1 && game->keys >= 1 && tiles.player == 1)
+	if (game->end_count == 1 && game->keys_count >= 1 && game->player_count == 1)
 		return (1);
 	return (0);
 }
@@ -94,7 +88,7 @@ int	valid_top_and_bottom(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && line[i] == '1')
+	while (line[i] && line[i] == WALL)
 		i++;
 	return (line[i] == '\0');
 }
@@ -103,12 +97,12 @@ int	valid_left_and_right(char *line)
 {
 	int	i;
 
-	if (line[0] != '1')
+	if (line[0] != WALL)
 		return (0);
 	i = 0;
 	while (line[i])
 		i++;
-	if (line[i - 1] == '1')
+	if (line[i - 1] == WALL)
 		return (1);
 	return (0);
 }

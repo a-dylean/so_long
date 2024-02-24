@@ -14,15 +14,8 @@
 
 void	parse_input(char *path_to_map, t_vars *game)
 {
-	t_tiles	tiles;
-
-	tiles.player = 0;
-	tiles.end = 0;
-	tiles.keys = 0;
-	game->keys = tiles.keys;
 	if (!valid_format(path_to_map))
-		//leak here
-		print_error("Invalid map format!");
+		exit_with_error("Invalid map format");
 	game->map_height = count_input_lines(path_to_map);
 	game->map = malloc(sizeof(char *) * (game->map_height + 1));
 	if (!game->map)
@@ -33,17 +26,14 @@ void	parse_input(char *path_to_map, t_vars *game)
 	populate_map(path_to_map, game->map);
 	game->map[game->map_height] = NULL;
 	populate_map(path_to_map, game->map_copy);
-	game->map_copy[game->map_height] = NULL;	
-	game->map_weight = ft_strlen(game->map[0]); //segfault here
-	if (!valid_tiles(game) || !valid_num_of_tiles(game, tiles)|| !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
+	game->map_copy[game->map_height] = NULL;
+	if (game->map[0])
+		game->map_weight = ft_strlen(game->map[0]);
+	if (!valid_tiles(game) || !valid_num_of_tiles(game)|| !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
 	{
-		//proper free missing
-		print_error("Invalid map!");
-		exit(0);
+		free_2d_array(game->map);
+		free_2d_array(game->map_copy);
+		exit_with_error("Invalid map");
 	}
 }
 
-// void	**get_map(char *path_to_map, t_vars *game)
-// {
-	
-// }

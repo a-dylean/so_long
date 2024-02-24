@@ -66,18 +66,16 @@ int next_tile_check(t_vars *game, int *current_position)
 		game->map[current_position[0]][current_position[1]] = FREE;
 		ft_printf("Steps: %d\n", game->steps);
 	}
-	else if (tile == WALL || (tile == END && game->keys_collected != game->keys))
+	else if (tile == WALL || (tile == END && game->keys_collected != game->keys_count))
 	{
 		game->player_pos_x = current_position[0];
 		game->player_pos_y = current_position[1];
 	}
 	if (tile == KEY)
 		game->keys_collected++;
-	else if (tile == END && game->keys_collected == game->keys)
+	else if (tile == END && game->keys_collected == game->keys_count)
 	{
 		game->steps++;
-		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
-		game->map[current_position[0]][current_position[1]] = FREE;
 		ft_printf("You won in %d steps. Can you do better next time?\n", game->steps);
 		close_game(game);
 	}

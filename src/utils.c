@@ -35,6 +35,8 @@ int	count_input_lines(char *path_to_map)
 
 	count = 0;
 	fd = open(path_to_map, O_RDONLY);
+	if (fd == -1)
+		exit_with_error("No such file or directory");
 	while (1)
 	{
 		new_line = get_next_line(fd);
@@ -58,8 +60,7 @@ void populate_map(char *path_to_map, char **map)
     i = 0;
     fd = open(path_to_map, O_RDONLY);
 	if (fd == -1)
-		//add free statement, there's a leak if quits here
-		print_error("No such file or directory");
+		exit_with_error("No such file or directory");
 	while (1)
 	{
 		new_line = get_next_line(fd);
@@ -76,8 +77,10 @@ void populate_map(char *path_to_map, char **map)
 	}
     close(fd);
 }
-void print_error(char *error)
+
+void exit_with_error(char *error)
 {
     ft_printf("Error\n");
     ft_printf("%s\n", error);
+	exit(0);
 }
