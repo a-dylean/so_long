@@ -11,11 +11,11 @@
 # define SIZE 24
 # define WINDOW_NAME "so_long"
 
-# define PATH_KEY "xpm/key.xpm"
-# define PATH_WALL "xpm/wall.xpm"
-# define PATH_PLAYER "xpm/player.xpm"
-# define PATH_FREE "xpm/free.xpm"
-# define PATH_END "xpm/end.xpm"
+# define PATH_KEY "textures/key.xpm"
+# define PATH_WALL "textures/wall.xpm"
+# define PATH_PLAYER "textures/player.xpm"
+# define PATH_FREE "textures/free.xpm"
+# define PATH_END "textures/end.xpm"
 
 # define WALL '1'
 # define FREE '0'
@@ -28,6 +28,9 @@
 # define LEFT 97
 # define RIGHT 100
 # define ESC 65307
+
+#define X game->pos_x * SIZE
+#define Y game->pos_y * SIZE
 
 typedef struct s_vars
 {

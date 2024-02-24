@@ -39,3 +39,30 @@ void	parse_input(char *path_to_map, t_vars *game)
 	}
 }
 
+void populate_map(char *path_to_map, char **map)
+{
+    int fd;
+    char *new_line;
+	char *clean_new_line;
+    int i;
+
+    i = 0;
+    fd = open(path_to_map, O_RDONLY);
+	if (fd == -1)
+		exit_with_error("No such file or directory");
+	while (1)
+	{
+		new_line = get_next_line(fd);
+		if (!new_line)
+            break ;
+		clean_new_line = ft_strtrim(new_line, "\n");
+		free(new_line);
+		map[i] = malloc(ft_strlen(clean_new_line) + 1);
+		if (!map[i])
+			return (free(clean_new_line));
+		ft_strlcpy(map[i], clean_new_line, ft_strlen(clean_new_line) + 1);
+		free(clean_new_line);
+		i++;
+	}
+    close(fd);
+}

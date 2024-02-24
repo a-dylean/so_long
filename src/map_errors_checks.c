@@ -17,7 +17,7 @@ int	valid_format(char *filename)
 	int	len;
 
 	len = ft_strlen(filename);
-	if (len < 5)
+	if (len < 4)
 		return (0);
 	return (ft_strncmp(filename + len - 4, ".ber", ft_strlen(filename)) == 0);
 }

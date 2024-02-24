@@ -49,38 +49,24 @@ int	count_input_lines(char *path_to_map)
 	close(fd);
 	return (count);
 }
-
-void populate_map(char *path_to_map, char **map)
-{
-    int fd;
-    char *new_line;
-	char *clean_new_line;
-    int i;
-
-    i = 0;
-    fd = open(path_to_map, O_RDONLY);
-	if (fd == -1)
-		exit_with_error("No such file or directory");
-	while (1)
-	{
-		new_line = get_next_line(fd);
-		if (!new_line)
-            break ;
-		clean_new_line = ft_strtrim(new_line, "\n");
-		free(new_line);
-		map[i] = malloc(ft_strlen(clean_new_line) + 1);
-		if (!map[i])
-			return (free(clean_new_line));
-		ft_strlcpy(map[i], clean_new_line, ft_strlen(clean_new_line) + 1);
-		free(clean_new_line);
-		i++;
-	}
-    close(fd);
-}
-
 void exit_with_error(char *error)
 {
     ft_printf("Error\n");
     ft_printf("%s\n", error);
 	exit(0);
+}
+int	close_game(t_vars *game)
+{
+	mlx_destroy_image(game->mlx, game->end);
+	mlx_destroy_image(game->mlx, game->wall);
+	mlx_destroy_image(game->mlx, game->free);
+	mlx_destroy_image(game->mlx, game->player);
+	mlx_destroy_image(game->mlx, game->key);
+	mlx_destroy_window(game->mlx, game->window);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free_2d_array(game->map);
+	free_2d_array(game->map_copy);
+	exit(0);
+	return (0);
 }
