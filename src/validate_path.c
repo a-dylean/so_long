@@ -63,3 +63,4 @@ int valid_path(t_vars *game)
     }
     return (1);
 }
+

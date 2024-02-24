@@ -114,7 +114,7 @@ int key_hook(int keycode, t_vars *game)
 	return (0);
 }
 
-void	close_game(t_vars *game)
+int	close_game(t_vars *game)
 {
 	mlx_destroy_image(game->mlx, game->end);
 	mlx_destroy_image(game->mlx, game->wall);
@@ -127,4 +127,5 @@ void	close_game(t_vars *game)
 	free_2d_array(game->map);
 	free_2d_array(game->map_copy);
 	exit(0);
+	return (0);
 }

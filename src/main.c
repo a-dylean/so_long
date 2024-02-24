@@ -19,8 +19,10 @@ int	main(int argc, char **argv)
 		if (!game.window)
 			return (free(game.mlx), 1);
 		create_images(&game);
-		//render_images(&game);
+		// render_images(&game);
 		mlx_hook(game.window, KeyPress, KeyPressMask, key_hook, &game);
+		mlx_hook(game.window, DestroyNotify, \
+	ButtonPressMask, close_game, &game);
 		mlx_loop_hook(game.mlx, &render_images, &game);
 		mlx_loop(game.mlx);
 	}

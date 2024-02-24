@@ -72,7 +72,7 @@ int			valid_path(t_vars *game);
 void		create_images(t_vars *game);
 int			render_images(t_vars *game);
 int			key_hook(int keycode, t_vars *game);
-void		close_game(t_vars *game);
+int			close_game(t_vars *game);
 void		print_error(char *error);
 int			next_tile_check(t_vars *game, int *current_position);
 
