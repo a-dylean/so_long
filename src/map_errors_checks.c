@@ -6,45 +6,11 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:43:55 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/23 15:38:00 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:06:06 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-int	valid_format(char *filename)
-{
-	int	len;
-
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (0);
-	return (ft_strncmp(filename + len - 4, ".ber", ft_strlen(filename)) == 0);
-}
-
-int	valid_tiles(t_vars *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < game->map_height)
-	{
-		j = 0;
-		while (j < game->map_weight)
-		{
-			if ((game->map[i][j] != END && game->map[i][j] != WALL && game->map[i][j] != FREE
-					&& game->map[i][j] != PLAYER && game->map[i][j] != KEY))
-					{
-						game->msg_error = "Invalid component in the map or map is not rectangular\n";
-						return (0);
-					}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
 
 int	valid_num_of_tiles(t_vars *game)
 {
@@ -67,7 +33,8 @@ int	valid_num_of_tiles(t_vars *game)
 		}
 		i++;
 	}
-	if (game->end_count == 1 && game->keys_count >= 1 && game->player_count == 1)
+	if (game->end_count == 1 && game->keys_count >= 1
+		&& game->player_count == 1)
 		return (1);
 	game->msg_error = "Invalid number of required components in the map\n";
 	return (0);
@@ -75,9 +42,9 @@ int	valid_num_of_tiles(t_vars *game)
 
 int	valid_rectangular(t_vars *game)
 {
-	int i;
-    
-    i = 1;
+	int	i;
+
+	i = 1;
 	while (i < game->map_height)
 	{
 		if ((int)ft_strlen(game->map[i]) != game->map_weight)
@@ -114,12 +81,12 @@ int	valid_left_and_right(char *line)
 	return (0);
 }
 
-int valid_walls(t_vars *game)
+int	valid_walls(t_vars *game)
 {
-	int i;
-   	
+	int	i;
+
 	i = 0;
-  	while(game->map[i])
+	while (game->map[i])
 	{
 		if (i == 0 || i == game->map_height - 1)
 		{

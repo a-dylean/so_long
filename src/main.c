@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/25 15:47:59 by atonkopi          #+#    #+#             */
+/*   Updated: 2024/02/25 16:08:44 by atonkopi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
-void init_vars(t_vars *game)
+static void	init_vars(t_vars *game)
 {
 	game->map_height = 0;
 	game->map_weight = 0;
@@ -27,14 +39,14 @@ int	main(int argc, char **argv)
 		game.mlx = mlx_init();
 		if (!game.mlx)
 			return (1);
-		game.window = mlx_new_window(game.mlx, game.map_weight * SIZE,
+		game.win = mlx_new_window(game.mlx, game.map_weight * SIZE,
 				game.map_height * SIZE, WINDOW_NAME);
-		if (!game.window)
+		if (!game.win)
 			return (free(game.mlx), 1);
 		create_images(&game);
-		mlx_hook(game.window, KeyPress, KeyPressMask, key_hook, &game);
-		mlx_hook(game.window, DestroyNotify, \
-	ButtonPressMask, close_game, &game);
+		mlx_hook(game.win, KeyPress, KeyPressMask, key_hook, &game);
+		mlx_hook(game.win, DestroyNotify, ButtonPressMask, close_game,
+			&game);
 		mlx_loop_hook(game.mlx, &render_images, &game);
 		mlx_loop(game.mlx);
 	}
