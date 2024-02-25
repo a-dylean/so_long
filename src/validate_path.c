@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:04 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:10:40 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:04:49 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	valid_path(t_vars *game)
 		j = 0;
 		while (j < game->map_weight)
 		{
-			if (game->map_copy[i][j] == 'C' || game->map_copy[i][j] == 'E')
+			if (game->map_copy[i][j] == KEY || game->map_copy[i][j] == END)
 			{
 				game->msg_error = "Invalid path detected\n";
 				return (0);
