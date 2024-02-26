@@ -6,27 +6,32 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:04 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 19:04:49 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:17:30 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static void	flood_fill(t_vars *game, int x, int y)
+static void	flood_fill(t_vars *game, int x, int y, int flag)
 {
-	if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
-		|| game->map_copy[y][x] == WALL || game->map_copy[y][x] == 'V')
-		return ;
-	game->map_copy[y][x] = 'V';
-	flood_fill(game, x + 1, y);
-	flood_fill(game, x - 1, y);
-	flood_fill(game, x, y + 1);
-	flood_fill(game, x, y - 1);
-}
-
-static void	fill(t_vars *game, int x, int y)
-{
-	flood_fill(game, x, y);
+	if (flag == 1)
+	{
+		if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
+			|| game->map_copy[y][x] == 'V' || game->map_copy[y][x] == 'X')
+			return ;
+		game->map_copy[y][x] = 'X';
+	}
+	else
+	{
+		if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
+			|| game->map_copy[y][x] == WALL || game->map_copy[y][x] == 'V')
+			return ;
+		game->map_copy[y][x] = 'V';
+	}
+	flood_fill(game, x + 1, y, flag);
+	flood_fill(game, x - 1, y, flag);
+	flood_fill(game, x, y + 1, flag);
+	flood_fill(game, x, y - 1, flag);
 }
 
 static void	player_position(t_vars *game)
@@ -59,12 +64,14 @@ int	valid_path(t_vars *game)
 
 	i = 0;
 	player_position(game);
-	fill(game, game->player_pos_y, game->player_pos_x);
+	flood_fill(game, game->player_pos_y, game->player_pos_x, 0);
+	flood_fill(game, game->player_pos_y, game->player_pos_x, 1);
 	while (i < game->map_height)
 	{
 		j = 0;
 		while (j < game->map_weight)
 		{
+			printf("%c\n", game->map_copy[i][j]);
 			if (game->map_copy[i][j] == KEY || game->map_copy[i][j] == END)
 			{
 				game->msg_error = "Invalid path detected\n";
