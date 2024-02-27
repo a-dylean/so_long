@@ -53,6 +53,8 @@ static int	next_tile_check(t_vars *game, int *current_position)
 		game->steps++;
 		ft_printf("Steps: %d\n", game->steps);
 	}
+	// else if (tile == WALL && game->map[current_position[0]][current_position[1]] == END)
+	// 	game->map[game->player_pos_x][game->player_pos_y] = END;
 	else
 	{
 		game->player_pos_x = current_position[0];
@@ -100,6 +102,11 @@ int	key_hook(int keycode, t_vars *game)
 	if (!handle_keys(keycode, game))
 		return (0);
 	next_tile_check(game, current_position);
+	// if (game->map[current_position[0]][current_position[1]] == END)
+	// 	game->map[current_position[0]][current_position[1]] = END;
+	// else
+	// 	game->map[current_position[0]][current_position[1]] = FREE;
+	// game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
 	if (game->map[game->player_pos_x][game->player_pos_y] == END)
 	{
 		game->map[game->player_pos_x][game->player_pos_y] = END;

@@ -12,26 +12,16 @@
 
 #include "../includes/so_long.h"
 
-static void	flood_fill(t_vars *game, int x, int y, int flag)
+static void	flood_fill(t_vars *game, int x, int y)
 {
-	if (flag == 1)
-	{
-		if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
-			|| game->map_copy[y][x] == 'V' || game->map_copy[y][x] == 'X')
-			return ;
-		game->map_copy[y][x] = 'X';
-	}
-	else
-	{
 		if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
 			|| game->map_copy[y][x] == WALL || game->map_copy[y][x] == 'V')
 			return ;
 		game->map_copy[y][x] = 'V';
-	}
-	flood_fill(game, x + 1, y, flag);
-	flood_fill(game, x - 1, y, flag);
-	flood_fill(game, x, y + 1, flag);
-	flood_fill(game, x, y - 1, flag);
+	flood_fill(game, x + 1, y);
+	flood_fill(game, x - 1, y);
+	flood_fill(game, x, y + 1);
+	flood_fill(game, x, y - 1);
 }
 
 static void	player_position(t_vars *game)
@@ -64,8 +54,7 @@ int	valid_path(t_vars *game)
 
 	i = 0;
 	player_position(game);
-	flood_fill(game, game->player_pos_y, game->player_pos_x, 0);
-	flood_fill(game, game->player_pos_y, game->player_pos_x, 1);
+	flood_fill(game, game->player_pos_y, game->player_pos_x);
 	while (i < game->map_height)
 	{
 		j = 0;
