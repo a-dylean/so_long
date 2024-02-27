@@ -48,21 +48,23 @@ static int	next_tile_check(t_vars *game, int *current_position)
 	char	tile;
 
 	tile = game->map[game->player_pos_x][game->player_pos_y];
-	if (tile != WALL && tile != END)
+	if (tile != WALL)
 	{
 		game->steps++;
-		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
-		game->map[current_position[0]][current_position[1]] = FREE;
 		ft_printf("Steps: %d\n", game->steps);
 	}
-	else if (tile == WALL || (tile == END
-			&& game->keys_collected != game->keys_count))
+	else
 	{
 		game->player_pos_x = current_position[0];
 		game->player_pos_y = current_position[1];
 	}
 	if (tile == KEY)
+	{
+		game->map[current_position[0]][current_position[1]] = FREE;
 		game->keys_collected++;
+	}	
+	if (tile == FREE && game->map[current_position[0]][current_position[1]] != END)
+		game->map[current_position[0]][current_position[1]] = FREE;
 	else if (tile == END && game->keys_collected == game->keys_count)
 	{
 		game->steps++;
@@ -98,5 +100,12 @@ int	key_hook(int keycode, t_vars *game)
 	if (!handle_keys(keycode, game))
 		return (0);
 	next_tile_check(game, current_position);
+	if (game->map[game->player_pos_x][game->player_pos_y] == END)
+	{
+		game->map[game->player_pos_x][game->player_pos_y] = END;
+		game->map[current_position[0]][current_position[1]] = FREE;
+	}	
+	else
+		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
 	return (0);
 }
