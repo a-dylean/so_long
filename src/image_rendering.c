@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:27:50 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:02:01 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:34:39 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,21 @@ static int	next_tile_check(t_vars *game, int *current_position)
 	char	tile;
 
 	tile = game->map[game->player_pos_x][game->player_pos_y];
-	if (tile != WALL)
+	if (tile != WALL && tile != END)
 	{
 		game->steps++;
+		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
+		game->map[current_position[0]][current_position[1]] = FREE;
 		ft_printf("Steps: %d\n", game->steps);
 	}
-	// else if (tile == WALL && game->map[current_position[0]][current_position[1]] == END)
-	// 	game->map[game->player_pos_x][game->player_pos_y] = END;
-	else
+	else if (tile == WALL || (tile == END
+			&& game->keys_collected != game->keys_count))
 	{
 		game->player_pos_x = current_position[0];
 		game->player_pos_y = current_position[1];
 	}
 	if (tile == KEY)
-	{
-		game->map[current_position[0]][current_position[1]] = FREE;
 		game->keys_collected++;
-	}	
-	if (tile == FREE && game->map[current_position[0]][current_position[1]] != END)
-		game->map[current_position[0]][current_position[1]] = FREE;
 	else if (tile == END && game->keys_collected == game->keys_count)
 	{
 		game->steps++;
@@ -102,17 +98,5 @@ int	key_hook(int keycode, t_vars *game)
 	if (!handle_keys(keycode, game))
 		return (0);
 	next_tile_check(game, current_position);
-	// if (game->map[current_position[0]][current_position[1]] == END)
-	// 	game->map[current_position[0]][current_position[1]] = END;
-	// else
-	// 	game->map[current_position[0]][current_position[1]] = FREE;
-	// game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
-	if (game->map[game->player_pos_x][game->player_pos_y] == END)
-	{
-		game->map[game->player_pos_x][game->player_pos_y] = END;
-		game->map[current_position[0]][current_position[1]] = FREE;
-	}	
-	else
-		game->map[game->player_pos_x][game->player_pos_y] = PLAYER;
 	return (0);
 }

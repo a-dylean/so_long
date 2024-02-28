@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:04 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/26 15:17:30 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:21:36 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 static void	flood_fill(t_vars *game, int x, int y)
 {
-		if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
-			|| game->map_copy[y][x] == WALL || game->map_copy[y][x] == 'V')
-			return ;
-		game->map_copy[y][x] = 'V';
+	if (x < 0 || y < 0 || x >= game->map_weight || y >= game->map_height
+		|| game->map_copy[y][x] == WALL)
+		return ;
+	if (game->map_copy[y][x] == KEY)
+		game->keys_collected++;
+	if (game->map_copy[y][x] == END)
+	{
+		game->exit_found = 1;
+		if (game->keys_count == game->keys_collected)
+			game->map_copy[y][x] = WALL;
+		return ;
+	}
+	if (game->map_copy[y][x] == KEY || game->map_copy[y][x] == FREE)
+		game->map_copy[y][x] = WALL;
 	flood_fill(game, x + 1, y);
 	flood_fill(game, x - 1, y);
 	flood_fill(game, x, y + 1);
@@ -60,8 +70,7 @@ int	valid_path(t_vars *game)
 		j = 0;
 		while (j < game->map_weight)
 		{
-			printf("%c\n", game->map_copy[i][j]);
-			if (game->map_copy[i][j] == KEY || game->map_copy[i][j] == END)
+			if (game->map_copy[i][j] == KEY || game->exit_found == 0)
 			{
 				game->msg_error = "Invalid path detected\n";
 				return (0);

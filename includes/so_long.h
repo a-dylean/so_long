@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:40:22 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:12:22 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:26:39 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
+	char	**map;
+	char	**map_copy;
 	int		map_height;
 	int		map_weight;
 	int		pos_x;
@@ -49,13 +51,12 @@ typedef struct s_vars
 	int		keys_count;
 	int		keys_collected;
 	int		steps;
-	char	**map;
-	char	**map_copy;
 	void	*player;
 	void	*wall;
 	void	*free;
 	void	*end;
 	void	*key;
+	int		exit_found;
 	char	*msg_error;
 }			t_vars;
 

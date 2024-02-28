@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:59 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:08:44 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:27:11 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_vars(t_vars *game)
 	game->keys_count = 0;
 	game->keys_collected = 0;
 	game->steps = 0;
+	game->exit_found = 0;
 	game->msg_error = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:30:31 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:13:11 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:33:49 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	parse_input(char *path_to_map, t_vars *game)
 			ft_printf("Error\n%s", game->msg_error);
 		exit(0);
 	}
+	game->keys_collected = 0;
 }
