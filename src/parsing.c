@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:30:31 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/28 14:33:49 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:53:41 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,17 @@ static void	populate_map(char *path_to_map, char **map)
 		if (!new_line)
 			break ;
 		clean_new_line = ft_strtrim(new_line, "\n");
+		// if (!clean_new_line)
+		// {
+		// 	ft_printf("Error\nEmpty line found\n");
+		// 	free(new_line);
+		// 	free(clean_new_line);
+		// 	free_2d_array(map);
+		// 	exit(0);
+		// }
 		free(new_line);
 		map[i] = malloc(ft_strlen(clean_new_line) + 1);
+		//map[i] = ft_calloc(ft_strlen(clean_new_line) + 1, sizeof(char));
 		if (!map[i])
 			return (free(clean_new_line));
 		ft_strlcpy(map[i], clean_new_line, ft_strlen(clean_new_line) + 1);
