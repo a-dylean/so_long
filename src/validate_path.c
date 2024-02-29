@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:04 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/29 13:47:24 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:17:53 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	valid_path(t_vars *game)
 		{
 			if (game->map_copy[i][j] == KEY || game->exit_found == 0)
 			{
-				game->msg_error = "Invalid path detected\n";
+				game->msg_error = "Invalid path detected";
 				free_map(game->map_copy);
 				return (0);
 			}
@@ -123,7 +123,7 @@ int	valid_tiles(t_vars *game)
 					&& game->map[i][j] != FREE && game->map[i][j] != PLAYER
 					&& game->map[i][j] != KEY))
 			{
-				game->msg_error = "Invalid component in the map\n";
+				game->msg_error = "Invalid component in the map";
 				return (0);
 			}
 			j++;

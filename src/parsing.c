@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:30:31 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/29 13:47:06 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:17:18 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,6 @@ void	parse_input(char *path_to_map, t_vars *game)
 	close(fd);
 	if (!valid_tiles(game) || !valid_num_of_tiles(game)
 		|| !valid_rectangular(game) || !valid_walls(game) || !valid_path(game))
-	{
-		free_map(game->map);
-		if (game->msg_error)
-			ft_printf("Error\n%s", game->msg_error);
-		exit(0);
-	}
+		free_and_exit(game->msg_error, game, "");
 	game->keys_collected = 0;
 }
