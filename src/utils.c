@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:17:26 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:07:55 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:16:33 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void	create_images(t_vars *game)
 	game->key = mlx_xpm_file_to_image(game->mlx, PATH_KEY, &pos[0], &pos[1]);
 }
 
-void	free_2d_array(char **arr)
+void	free_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	if (!arr)
+	if (!map)
 		return ;
-	while (arr[i])
+	while (map[i])
 	{
-		free(arr[i]);
+		free(map[i]);
 		i++;
 	}
-	free(arr);
+	free(map);
 }
 
 int	count_input_lines(char *path_to_map)
@@ -81,8 +81,7 @@ int	close_game(t_vars *game)
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	free_2d_array(game->map);
-	//free_2d_array(game->map_copy);
+	free_map(game->map);
 	exit(0);
 	return (0);
 }

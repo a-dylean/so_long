@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:47:04 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/28 14:21:36 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:47:24 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	player_position(t_vars *game)
 		i++;
 	}
 }
+
 char	**copy_map(t_vars *game)
 {
 	int		i;
@@ -72,9 +73,7 @@ char	**copy_map(t_vars *game)
 	{
 		temp[i] = ft_strdup(game->map[i]);
 		if (!temp[i])
-		{
 			exit_with_error("Memory allocation failed");
-		}
 		i++;
 	}
 	temp[i] = NULL;
@@ -98,14 +97,14 @@ int	valid_path(t_vars *game)
 			if (game->map_copy[i][j] == KEY || game->exit_found == 0)
 			{
 				game->msg_error = "Invalid path detected\n";
-				free_2d_array(game->map_copy);
+				free_map(game->map_copy);
 				return (0);
 			}
 			j++;
 		}
 		i++;
 	}
-	free_2d_array(game->map_copy);
+	free_map(game->map_copy);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:40:22 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/28 14:26:39 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:48:01 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ typedef struct s_vars
 }			t_vars;
 
 void		parse_input(char *path_to_map, t_vars *game);
-void		free_2d_array(char **arr);
 int			count_input_lines(char *path_to_map);
-int	valid_format(char *filename);
+int			valid_format(char *filename);
 int			valid_tiles(t_vars *game);
 int			valid_num_of_tiles(t_vars *game);
 int			valid_rectangular(t_vars *game);
@@ -73,6 +72,7 @@ void		create_images(t_vars *game);
 int			render_images(t_vars *game);
 int			key_hook(int keycode, t_vars *game);
 int			close_game(t_vars *game);
+void		free_map(char **map);
 void		exit_with_error(char *error);
 
 #endif
