@@ -56,6 +56,30 @@ static void	player_position(t_vars *game)
 		i++;
 	}
 }
+char	**copy_map(t_vars *game)
+{
+	int		i;
+	char	**temp;
+
+	i = 0;
+	temp = malloc(sizeof(char *) * (game->map_height + 1));
+	if (!temp)
+	{
+		free(temp);
+		exit_with_error("Memory allocation failed");
+	}
+	while (i < game->map_height)
+	{
+		temp[i] = ft_strdup(game->map[i]);
+		if (!temp[i])
+		{
+			exit_with_error("Memory allocation failed");
+		}
+		i++;
+	}
+	temp[i] = NULL;
+	return (temp);
+}
 
 int	valid_path(t_vars *game)
 {
@@ -63,6 +87,7 @@ int	valid_path(t_vars *game)
 	int	j;
 
 	i = 0;
+	game->map_copy = copy_map(game);
 	player_position(game);
 	flood_fill(game, game->player_pos_y, game->player_pos_x);
 	while (i < game->map_height)
@@ -73,12 +98,14 @@ int	valid_path(t_vars *game)
 			if (game->map_copy[i][j] == KEY || game->exit_found == 0)
 			{
 				game->msg_error = "Invalid path detected\n";
+				free_2d_array(game->map_copy);
 				return (0);
 			}
 			j++;
 		}
 		i++;
 	}
+	free_2d_array(game->map_copy);
 	return (1);
 }
 

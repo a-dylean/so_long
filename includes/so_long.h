@@ -63,6 +63,7 @@ typedef struct s_vars
 void		parse_input(char *path_to_map, t_vars *game);
 void		free_2d_array(char **arr);
 int			count_input_lines(char *path_to_map);
+int	valid_format(char *filename);
 int			valid_tiles(t_vars *game);
 int			valid_num_of_tiles(t_vars *game);
 int			valid_rectangular(t_vars *game);

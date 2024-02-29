@@ -45,6 +45,8 @@ int	count_input_lines(char *path_to_map)
 	char	*new_line;
 	int		count;
 
+	if (!valid_format(path_to_map))
+		exit_with_error("Invalid map format");
 	count = 0;
 	fd = open(path_to_map, O_RDONLY);
 	if (fd == -1)
@@ -80,7 +82,7 @@ int	close_game(t_vars *game)
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	free_2d_array(game->map);
-	free_2d_array(game->map_copy);
+	//free_2d_array(game->map_copy);
 	exit(0);
 	return (0);
 }

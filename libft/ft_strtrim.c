@@ -41,7 +41,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		k;
 	int		size;
 
-	if (!s1 || !set)
+	if (!s1 || !set || !*s1 || s1[0] == '\n')
 		return (NULL);
 	size = get_size(s1, set) + 1;
 	if (size <= 0)

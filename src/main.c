@@ -12,9 +12,9 @@
 
 #include "../includes/so_long.h"
 
-static void	init_vars(t_vars *game)
+static void	init_vars(char *path_to_map, t_vars *game)
 {
-	game->map_height = 0;
+	game->map_height = count_input_lines(path_to_map);
 	game->map_weight = 0;
 	game->pos_x = 0;
 	game->pos_y = 0;
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		init_vars(&game);
+		init_vars(argv[1], &game);
 		parse_input(argv[1], &game);
 		game.mlx = mlx_init();
 		if (!game.mlx)
