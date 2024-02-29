@@ -6,7 +6,7 @@
 /*   By: atonkopi <atonkopi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:43:55 by atonkopi          #+#    #+#             */
-/*   Updated: 2024/02/25 16:06:06 by atonkopi         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:00:03 by atonkopi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	valid_rectangular(t_vars *game)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (i < game->map_height)
 	{
 		if ((int)ft_strlen(game->map[i]) != game->map_weight)
