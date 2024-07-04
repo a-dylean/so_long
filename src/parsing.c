@@ -25,10 +25,8 @@ int	valid_format(char *filename)
 static void	init_empty_map(t_vars *game)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	game->map = malloc(sizeof(char *) * (game->map_height + 1));
 	if (!game->map)
 	{
