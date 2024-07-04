@@ -9,13 +9,10 @@ Its purpose is to learn how to work with basic gameplay elements (like textures,
 git clone git@github.com:a-dylean/so_long.git
 ```
 ```
-cd so_long
+cd so_long && make
 ```
 ```
-make
-```
-```
-/.so_long [PATH TO MAP]
+./so_long [PATH TO MAP]
 ```
 **Print screen**
 ---
